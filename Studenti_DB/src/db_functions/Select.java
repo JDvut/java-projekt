@@ -1,20 +1,25 @@
 package db_functions;
 
 import db.Connections;
+import student.Student;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import app_functions.HelperFns;
 
 public class Select {
-	public static void getAll() {
+	public static void getAll(ArrayList<Student> studentsArray) {
 		String q = """
 			SELECT
 			    S.ID,
 			    S.first_name,
 			    S.second_name,
 			    S.birth_year,
+			    S.group_id,
 			    G.group_name,
 			    GROUP_CONCAT(Marks.mark, ', ') AS all_marks
 			FROM
@@ -37,14 +42,26 @@ public class Select {
         ) {
             while (rs.next()) {
             	String marks = rs.getString("all_marks");
+            	ArrayList<Integer> iArray = new ArrayList<Integer>();
             	
-            	System.out.println(
-            		rs.getInt("ID") + "\t" + 
-            		rs.getString("first_name") + "\t" + 
-            		rs.getString("second_name") + "\t" + 
-            		rs.getInt("birth_year") + "\t" + 
-            		rs.getString("group_name") + "\t" + 
-            		(marks != null ? marks : "No marks")
+            	if (marks != null) {
+            		String sArray [] = marks.split(", ");
+            		for (String s:sArray) {
+            			try {
+                			iArray.add(Integer.parseInt(s));
+	            		} catch (NumberFormatException e) {
+	            	        System.err.println("Error: Could not parse as an integer: " + e);
+	            	    }
+                	}
+            	}
+            	
+            	studentsArray.add(new Student(
+            		rs.getInt("ID"),
+            		rs.getString("first_name"),
+            		rs.getString("second_name"),
+            		rs.getInt("birth_year"),
+            		rs.getInt("group_id"),
+            		iArray)
             	);
             }
          } catch (SQLException e) {

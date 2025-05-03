@@ -49,8 +49,4 @@ public class HelperFns extends MorseAC {
             return null;
         }
     }
-    
-    public static void sortBySecondName() {
-    	
-    }
 }
