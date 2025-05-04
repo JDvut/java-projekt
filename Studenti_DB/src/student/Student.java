@@ -5,21 +5,6 @@ import java.util.ArrayList;
 import app_functions.HelperFns;
 
 public class Student implements Comparable<Student> {
-/*
-	data structure
-	
-	[
-		{
-			"id": 1,
-			"first_name": "A",
-			"second_name": "B",
-			"birth_year": 1992,
-			"group_id": 1,
-			"marks": [1, 1, 1, 1] 
-		},
-	]
-*/
-	
 	private int id;
 	private String first_name;
 	private String second_name;
