@@ -18,7 +18,7 @@ public class App {
 	public static void main(String[] args) {
 		ArrayList<Student> studentArray = new ArrayList<Student>();
 		// TODO: everything else (good luck :))
-		
+
 		Scanner sc = new Scanner(System.in);
 		int userInput = 0;
 		boolean running = true;
@@ -278,7 +278,10 @@ public class App {
 					break;
 				case 12:
 					// TODO: update db
-					Update.beforeClosing(studentArray);
+					ArrayList<Student> tempA = new ArrayList<Student>();
+					Select.getAll(tempA);
+					
+					Update.beforeClosing(studentArray, tempA);
 					running = false;
 					break;
 			}

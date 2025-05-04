@@ -18,7 +18,7 @@ public class Connections {
 		return conn;
 	}
 	
-	public void disconnect() {
+	public static void disconnect() {
 		if (conn != null) {
 			try {
 				conn.close();

@@ -16,7 +16,7 @@ public class Student implements Comparable<Student> {
 			"birth_year": 1992,
 			"group_id": 1,
 			"marks": [1, 1, 1, 1] 
-		}
+		},
 	]
 */
 	
